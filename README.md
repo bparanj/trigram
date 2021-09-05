@@ -19,11 +19,8 @@ cat data/*.txt | ruby src/client.rb
 ```
 ruby -Itest -e 'ARGV.each {|f| require f}' ./test/*_test.rb
 ```
-  
 
 ## Known Issues
-
-  
 
 1. Cannot handle single quote that is in brothers-kramazov.txt like: don’t know. The regex
 replaces it to form the word: don t know. It can handle: don't know.
@@ -34,8 +31,6 @@ replaces it to form the word: don t know. It can handle: don't know.
 6. Taking multiple files as standard input will take more than 2.5 seconds. Using threads can improve the performance.
 
 ## Design Decisions
-
-  
 
 1. Text processing logic is encapsulated in the Normalizer class. There is only one reason to change this class: text processing.
 2. Given more time, multiple threads can be used to process each file independently. This will improve the performance.
