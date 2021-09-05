@@ -1,22 +1,28 @@
-Running the Code and the Tests
+## Running the Code and the Tests
 
-You need Ruby 2.7.4 to run the code and the tests.
+You need Ruby 2.7.4 to run the code and the tests. Development environment Ubuntu 20.04.
 
 1. Running the Code
     In the root of the project, run:
 
+```
 	ruby src/client.rb "./data/brothers-karamazov.txt" "./data/moby-dick.txt"
-	
+```
+
 	The program also accepts input via stdin: 
 
+```
 	cat data/*.txt | ruby src/client.rb
+```
 
 2. Running the Tests
 	From the project root, run:
 
+```
 		ruby -Itest -e 'ARGV.each {|f| require f}' ./test/*_test.rb
+```     
 
-Known Issues
+## Known Issues
 
 1. Cannot handle single quote that is in brothers-kramazov.txt like: don’t know. The regex
    replaces it to form the word: don t know. It can handle: don't know.
@@ -27,7 +33,7 @@ Known Issues
 6. Taking multiple files as standard input will take more than 2.5 seconds. Using threads can
    improve the performance.
 
-Design Decisions
+## Design Decisions
 
 1. Text processing logic is encapsulated in the Normalizer class. 
    There is only one reason to change this class:  text processing.
@@ -42,3 +48,26 @@ Design Decisions
 7. The Trigram class has the logic related to generating the trigrams. It can be easily
    extended to generate ngrams of any size. The current design avoids over engineering and
    is kept simple.
+
+## Extra
+
+Tested on Docker Version: 20.10.8 on Ubuntu 20.04. The Ruby version used in the image is 3.0.2.
+
+1. Build the Docker image. From the root of the project, run:
+
+```
+   docker build -t trigram .
+```
+
+   All the tests will run as part of the Docker image build.
+
+2. Run the container:
+
+```
+   docker run -it --rm --name trigram
+```
+
+   The run.sh will execute and the output will be seen in the standard output.
+
+
+
